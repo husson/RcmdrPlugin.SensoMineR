@@ -1,7 +1,7 @@
-
+utils::globalVariables(c('browseURL','.activeDataset'))
 ################################################################################
 ################################# FONCTION DEFMACRO ############################
-#           utilisée indirectement pour la construction des GUI                #
+#           utilisee indirectement pour la construction des GUI                #
 ################################################################################
   defmacro <- function(..., expr){
     expr <- substitute(expr)
@@ -48,7 +48,6 @@
 
 SensBoxprod<-function(){
 initializeDialog(title=gettextRcmdr("Boxprod"))
-require(SensoMineR)
 donnee<-get(.activeDataSet)
 nomdonnee<-.activeDataSet
 
@@ -93,7 +92,7 @@ optionsFrame <- tkframe(top,borderwidth=3,relief="ridge")
     tkgrid(numr.lab,numr.ent,sticky="w")
     tkgrid(numc.lab,numc.ent,sticky="w")
 
-######## Fonction liée au bouton OK -----------------------------------------------------------------------------------------------------
+######## Fonction liee au bouton OK -----------------------------------------------------------------------------------------------------
 
 App<-function(){
     variable <- vars.desc[as.numeric(tkcurselection(listdesc))+1]
@@ -116,7 +115,7 @@ onOK<-function(){
     top<-NULL
 }
 
-######## Positionnement des widgets sur la fenêtre principale ----------------------------------------------------------------------------
+######## Positionnement des widgets sur la fenetre principale ----------------------------------------------------------------------------
 App.but<-tkbutton(top,text="Submit",command=App,fg="blue",width=13,borderwidth=3)
 OKCancelHelp(helpSubject="boxprod")
 tkgrid(titleFrame)
@@ -143,10 +142,8 @@ buttonsFrame<-NULL
 ############################# histprod
 
 Senshist<-function(){
-require(tcltk)        ### Appel aux packages qui vont être utilisés
-require(SensoMineR)
-top<-tktoplevel(borderwidth=10)     ### Création de la fenêtre principale
-tkwm.title(top,"Histprod")        ### Donne un titre à la fenêtre principale
+top<-tktoplevel(borderwidth=10)     ### Creation de la fenetre principale
+tkwm.title(top,"Histprod")        ### Donne un titre a la fenetre principale
 
 ####### Frames ------------------------------------------------------------------------------------------------------------------------
 listframe <- tkframe(top)
@@ -168,8 +165,8 @@ listframe <- tkframe(top)
     tkgrid.configure(listdesc, sticky = "ew") 
 
 optionsframe <- tkframe(top,borderwidth=2,relief="ridge")
-    col<-tclVar("2")       ### Initialisation de la variable tcl "col" dont la valeur par défaut vaut 2
-    nbcol<-tkentry(optionsframe,width=4,textvariable=col)    ### Nouvelle boîte de texte
+    col<-tclVar("2")       ### Initialisation de la variable tcl "col" dont la valeur par defaut vaut 2
+    nbcol<-tkentry(optionsframe,width=4,textvariable=col)    ### Nouvelle boite de texte
     row<-tclVar("2")
     nbrow<-tkentry(optionsframe,width=4,textvariable=row)
     adj.val<-tclVar("1")
@@ -182,7 +179,7 @@ optionsframe <- tkframe(top,borderwidth=2,relief="ridge")
     tkgrid(adj.lab,adj,sticky="w")
 
 App<-function(){
-  ### On appelle App la fonction qui regroupera les trois lignes de code qui suivent (exécution de la fonction histprod notamment)
+  ### On appelle App la fonction qui regroupera les trois lignes de code qui suivent (execution de la fonction histprod notamment)
   variable <- vars.desc[as.numeric(tkcurselection(listdesc))+1]
   command2=paste('histprod(',nomdonnee,'[,c("', paste(variable, collapse='", "'), '")],firstvar=1,numc=',as.numeric(tclvalue(col)),',numr=',as.numeric(tclvalue(row)),',adjust=',as.numeric(tclvalue(adj.val)),')',sep='')    
   doItAndPrint(command2)
@@ -204,7 +201,7 @@ didact<-tkbutton(top,text="Didacticiel",borderwidth=3,width=12,fg="blue",command
 tkgrid(buttonsFrame, didact)
 tkgrid.configure(buttonsFrame, columnspan=2)
 tkgrid.configure(didact, column=2)
-tkfocus(top)  ### A l'ouverture de la fenêtre top, celle-ci deviendra la fenêtre active par défaut.
+tkfocus(top)  ### A l'ouverture de la fenetre top, celle-ci deviendra la fenetre active par defaut.
 }
 
 ######           FIN FONCTION HISTPROD         #######
@@ -213,8 +210,6 @@ tkfocus(top)  ### A l'ouverture de la fenêtre top, celle-ci deviendra la fenêtre
 ############################################################################################################################################
 ##############################################        FONCTION AVERAGETABLE         ########################################################
 SensAverage<-function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Averagetable")
 plus.funct <- function(){
@@ -322,7 +317,7 @@ onOK<-function(){
 
 
 
-#### Positionnement sur la fenêtre 'top' ----------------------------------------------------------------------------------------------
+#### Positionnement sur la fenetre 'top' ----------------------------------------------------------------------------------------------
 app.but<-tkbutton(top,text="Submit",command=App,fg="blue",width=13,borderwidth=3)
 OKCancelHelp(helpSubject="averagetable")
 tkgrid(tklabel(top, text = "Factors (double-click to formula)", fg = "blue"),  sticky = "w")
@@ -358,8 +353,6 @@ tkfocus(top)
 
 
 SensArdi <- function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Ardi")
 
@@ -426,7 +419,7 @@ optionsFrame<-tkframe(descopFrame,relief="ridge",borderwidth=2)
     tkgrid(resu.lab,resu,sticky="w")
 
 
-#### Fonction liée au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#### Fonction liee au bouton 'Sorties' --------------------------------------------------------------------------------------------------
 env<-environment()
 Gtab<-FALSE
 Gpandiv<-FALSE
@@ -486,7 +479,7 @@ onSortie<-function(){
     tkfocus(sortiestop)
 }
 
-#####Fonction liée à un doubleclick dans la liste des facteurs --------------------------------------------------------------------------------------------
+#####Fonction liee a un doubleclick dans la liste des facteurs --------------------------------------------------------------------------------------------
 doubleclick<-function(){
     col.nam<-tclvalue(col.val)
     col2.nam<-tclvalue(col2.val)
@@ -501,7 +494,7 @@ doubleclick<-function(){
 }
 
 
-####### Fonction liée au bouton Appliquer ---------------------------------------------------------------------------------------------------------------
+####### Fonction liee au bouton Appliquer ---------------------------------------------------------------------------------------------------------------
 App<-function(){
     n.div<-as.numeric(tclvalue(ndiv.val))
     centerVal<-as.numeric(tclvalue(centerValue))
@@ -530,7 +523,7 @@ App<-function(){
             command1=paste('descriptors=c(',descri,')',sep='')
 doItAndPrint(command1)
 
-#je lui demande d'afficher l' indice de la dernière variable quanlitative : le facteur      
+#je lui demande d'afficher l' indice de la derniere variable quanlitative : le facteur      
 
 command2=paste('factors=c(1:',nbfac,')',sep='')
 doItAndPrint(command2)
@@ -558,7 +551,7 @@ logger(command3)
 }
 
 
-#####Fonction liée au bouton OK, appel de Ardi et destruction de la fenêtre  ------------------------------------------------------------------------------
+#####Fonction liee au bouton OK, appel de Ardi et destruction de la fenetre  ------------------------------------------------------------------------------
 onOK<-function(){
     n.div<-as.numeric(tclvalue(ndiv.val))
     centerVal<-as.numeric(tclvalue(centerValue))
@@ -586,7 +579,7 @@ onOK<-function(){
             command1=paste('descriptors=c(',descri,')',sep='')
 doItAndPrint(command1)
 
-#je lui demande d'afficher l' indice de la dernière variable quanlitative : le facteur      
+#je lui demande d'afficher l' indice de la derniere variable quanlitative : le facteur      
 
 command2=paste('factors=c(1:',nbfac,')',sep='')
 doItAndPrint(command2)
@@ -654,8 +647,6 @@ tkfocus(top)
 ###################################################################          FONCTION   DECAT              ################################################
 
 SensDecat<-function(){
-    require(tcltk)
-    require(SensoMineR)
     top<-tktoplevel(borderwidth=5)
     tkwm.title(top,"Decat")
     OpFont <- tkfont.create(family="courier", size=10)
@@ -683,7 +674,7 @@ SensDecat<-function(){
       tkwm.title(PlotWin,gettextRcmdr("Displayed options"))
       tkwm.geometry(PlotWin, "-100+50")
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOKsub<-function()
       {
         assign("Rcol.low", Rcol.low.tmp, envir=env)
@@ -726,7 +717,7 @@ SensDecat<-function(){
       tkconfigure(graph.check,variable=cbValue)
       graph.lab<-tklabel(PlotWin,text="Add the associated graphic? ")
 
-      #mise en page des différents frames de PlotIndFrame
+      #mise en page des differents frames de PlotIndFrame
       tkgrid(RcolFrame)
       tkgrid(tklabel(PlotWin, text=" "))
       tkgrid(graph.lab,graph.check,sticky="w")
@@ -856,7 +847,7 @@ onFormul<-function(){
     tkselection.set(listdesc,0)
 
 
-#################### Fonctions liée au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liee au bouton 'Sorties' --------------------------------------------------------------------------------------------------
     env<-environment()
     Gtabf<-FALSE
     Gtabt<-FALSE
@@ -953,7 +944,7 @@ doubleclick2<-function(){
     }
 }
 
-###### Fonction principale qui lance DECAT sans fermer la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance DECAT sans fermer la fenetre------------------------------------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -994,14 +985,14 @@ App<-function(){
 }
 
 
-###### Fonction principale qui lance DECAT et ferme la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance DECAT et ferme la fenetre------------------------------------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
 }
 
 
-##### Positionnement des widgets et frames sur la fenêtre 'top' ------------------------------------------------------------------------------------------
+##### Positionnement des widgets et frames sur la fenetre 'top' ------------------------------------------------------------------------------------------
 App.but <- tkbutton(top,borderwidth=3,width=12,text="Submit",command=App,fg="blue")
 sorties.but<-tkbutton(optionsFrame,text="Outputs",command=onSortie,width=13,default="active",fg="darkred")
 
@@ -1034,8 +1025,6 @@ tkfocus(top)
 ############################################################################################################################################
 ##############################################        FONCTION GRAPHINTER         ##########################################################
 SensGraphinter <- function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Interaction plot")
 donnee<-get(.activeDataSet)
@@ -1097,7 +1086,7 @@ optionsFrame<-tkframe(descopframe,borderwidth=2,relief="ridge")
    tkgrid(resu.lab,resu,sticky="w")
 
 
-####### Fonction attachée aux boutons OK, appel de graphinter -------------------------------------------------------------------------------------
+####### Fonction attachee aux boutons OK, appel de graphinter -------------------------------------------------------------------------------------
 onOK<-function(){
     App()
     tkdestroy(top)
@@ -1178,12 +1167,10 @@ tkfocus(top)
 ###################################################       FONCTION PANELIPERF (ET PANELPERF)  #####################################################
 
 SensPaneliperf<-function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Panelists' performance")
 
-####### Fonction  intermédiaire (bouton Créer Formule) --------------------------------------------------------------------------
+####### Fonction  intermediaire (bouton Creer Formule) --------------------------------------------------------------------------
 onFormul<-function(){
     topformul<-tktoplevel(borderwidth=10)
     tkfocus(topformul)
@@ -1236,7 +1223,7 @@ onFormul<-function(){
 }
 
 
-####### Fonction  intermédiaire 2 (bouton Créer Formule) --------------------------------------------------------------------------
+####### Fonction  intermediaire 2 (bouton Creer Formule) --------------------------------------------------------------------------
 onFormul2<-function(){
     topformul<-tktoplevel(borderwidth=10)
     tkfocus(topformul)
@@ -1303,7 +1290,7 @@ onFormul2<-function(){
 
 
 
-#################### Fonctions liées au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liees au bouton 'Sorties' --------------------------------------------------------------------------------------------------
 
 env<-environment()
 Gprob<-TRUE
@@ -1519,7 +1506,7 @@ onSortie<-function(){
     tkgrid(resu.lab,resu,sticky="w")
 
 
-####### Fonction liée au bouton Appliquer, appel de la fonction Paneliperf -------------------------------------------------------------------------------
+####### Fonction liee au bouton Appliquer, appel de la fonction Paneliperf -------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -1613,7 +1600,7 @@ App<-function(){
   }
 
 
-####### Fonction liée au bouton OK, appel de la fonction Paneliperf -------------------------------------------------------------------------------
+####### Fonction liee au bouton OK, appel de la fonction Paneliperf -------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
@@ -1672,12 +1659,10 @@ tkfocus(top)
 ###################################################       FONCTION PANELPERF  #####################################################
 
 SensPanelperf<-function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Panel performance")
 
-####### Fonction  intermédiaire (bouton Créer Formule) --------------------------------------------------------------------------
+####### Fonction  intermediaire (bouton Creer Formule) --------------------------------------------------------------------------
 onFormul<-function(){
     topformul<-tktoplevel(borderwidth=10)
     tkfocus(topformul)
@@ -1730,7 +1715,7 @@ onFormul<-function(){
     tkbind(listfact,"<Double-ButtonPress-1>",doubleclick)
 }
 
-#################### Fonctions liées au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liees au bouton 'Sorties' --------------------------------------------------------------------------------------------------
 
 env<-environment()
 #Gcomp<-FALSE
@@ -1892,7 +1877,7 @@ onSortie<-function(){
       }
     }
 }
-####### Fonction liée au bouton Appliquer, appel de la fonction Panelperf -------------------------------------------------------------------------------
+####### Fonction liee au bouton Appliquer, appel de la fonction Panelperf -------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -1936,7 +1921,7 @@ App<-function(){
   }
 
 
-####### Fonction liée au bouton OK, appel de la fonction Panelperf -------------------------------------------------------------------------------
+####### Fonction liee au bouton OK, appel de la fonction Panelperf -------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
@@ -1972,8 +1957,6 @@ tkfocus(top)
 ###################################################       FONCTION  SCALEBYPANELIST #####################################################
 
 SensScaleby<-function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Scale by panelist")
 donnee<-get(.activeDataSet)
@@ -2045,7 +2028,7 @@ optionsFrame<-tkframe(descopframe,borderwidth=2,relief="ridge")
    tkgrid(resu.lab,resu,sticky="w")
 
 
-####### Fonction attachée aux boutons OK, appel de scalebypanelist -------------------------------------------------------------------------------------
+####### Fonction attachee aux boutons OK, appel de scalebypanelist -------------------------------------------------------------------------------------
 onOK<-function(){
     App()
     tkdestroy(top)
@@ -2118,8 +2101,6 @@ tkfocus(top)
 ###################################################################          FONCTION   PANELLIPSE              ################################################
 
 SensPanellipse<-function(){
-    require(tcltk)
-    require(SensoMineR)
     top<-tktoplevel(borderwidth=5)
     tkwm.title(top,"Multidimensional sensory profile: panellipse")
     donnee<-get(.activeDataSet)
@@ -2187,7 +2168,7 @@ descopframe<-tkframe(top)
       tkwm.title(PlotWin,gettextRcmdr("Options"))
       tkwm.geometry(PlotWin, "-100+50")
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOKsub<-function()
       {
         if(tclvalue(cbValue)=="1") assign("Rgraph", TRUE, envir=env)
@@ -2240,7 +2221,7 @@ descopframe<-tkframe(top)
       choix.val<-tclVar(Rchoix)
       choix.ent <- tkentry(PlotWin,width=15,textvariable=choix.val)
 
-      #mise en page des différents frames de PlotIndFrame
+      #mise en page des differents frames de PlotIndFrame
       tkgrid(tklabel(PlotWin, text=" "))
       tkgrid(axe.lab,axe.ent,sticky="w")
       tkgrid(simul.lab,simul.ent,sticky="w")
@@ -2296,7 +2277,7 @@ descFrame <- tkframe(top)
     tkselection.set(listdesc,0)
 
 
-#################### Fonctions liée au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liee au bouton 'Sorties' --------------------------------------------------------------------------------------------------
     env<-environment()
     Geig<-TRUE
     Gcoord<-FALSE
@@ -2369,7 +2350,7 @@ doubleclick<-function(){
 }
 tkbind(listfact,"<Double-ButtonPress-1>",doubleclick)
 
-###### Fonction principale qui lance PANELLIPSE sans fermer la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance PANELLIPSE sans fermer la fenetre------------------------------------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -2413,14 +2394,14 @@ App<-function(){
 }
 
 
-###### Fonction principale qui lance PANELLIPSE et ferme la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance PANELLIPSE et ferme la fenetre------------------------------------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
 }
 
 
-##### Positionnement des widgets et frames sur la fenêtre 'top' ------------------------------------------------------------------------------------------
+##### Positionnement des widgets et frames sur la fenetre 'top' ------------------------------------------------------------------------------------------
 App.but <- tkbutton(top,borderwidth=3,width=12,text="Submit",command=App,fg="blue")
 sorties.but<-tkbutton(optionsFrame,text="Outputs",command=onSortie,width=13,default="active",fg="darkred")
 
@@ -2451,8 +2432,6 @@ tkfocus(top)
 ###################################################################          FONCTION   PANELLIPSE.SESSION              ################################################
 
 SensPanellipse.Sess<-function(){
-    require(tcltk)
-    require(SensoMineR)
     top<-tktoplevel(borderwidth=5)
     tkwm.title(top,"Repetability of the multidimensional sensory profile")
     donnee<-get(.activeDataSet)
@@ -2524,7 +2503,7 @@ descopframe<-tkframe(top)
       tkwm.title(PlotWin,gettextRcmdr("Options"))
       tkwm.geometry(PlotWin, "-100+50")
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOKsub<-function()
       {
         if(tclvalue(cbValue)=="1") assign("Rgraph", TRUE, envir=env)
@@ -2577,7 +2556,7 @@ descopframe<-tkframe(top)
       choix.val<-tclVar(Rchoix)
       choix.ent <- tkentry(PlotWin,width=15,textvariable=choix.val)
 
-      #mise en page des différents frames de PlotIndFrame
+      #mise en page des differents frames de PlotIndFrame
       tkgrid(tklabel(PlotWin, text=" "))
       tkgrid(axe.lab,axe.ent,sticky="w")
       tkgrid(simul.lab,simul.ent,sticky="w")
@@ -2633,7 +2612,7 @@ descFrame <- tkframe(top)
     tkselection.set(listdesc,0)
 
 
-#################### Fonctions liée au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liee au bouton 'Sorties' --------------------------------------------------------------------------------------------------
     env<-environment()
     Geig<-FALSE
     Gcoord<-FALSE
@@ -2714,7 +2693,7 @@ doubleclick<-function(){
 }
 tkbind(listfact,"<Double-ButtonPress-1>",doubleclick)
 
-###### Fonction principale qui lance PANELLIPSE.SESSION sans fermer la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance PANELLIPSE.SESSION sans fermer la fenetre------------------------------------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -2760,14 +2739,14 @@ App<-function(){
 }
 
 
-###### Fonction principale qui lance PANELLIPSE.SESSION et ferme la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance PANELLIPSE.SESSION et ferme la fenetre------------------------------------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
 }
 
 
-##### Positionnement des widgets et frames sur la fenêtre 'top' ------------------------------------------------------------------------------------------
+##### Positionnement des widgets et frames sur la fenetre 'top' ------------------------------------------------------------------------------------------
 App.but <- tkbutton(top,borderwidth=3,width=12,text="Submit",command=App,fg="blue")
 sorties.but<-tkbutton(optionsFrame,text="Outputs",command=onSortie,width=13,default="active",fg="darkred")
 
@@ -2797,8 +2776,6 @@ tkfocus(top)
 ###################################################################          FONCTION   TRIANGLE.DESIGN              ################################################
 
 SensTriangdesign<-function(){
-    require(tcltk)
-    require(SensoMineR)
     top<-tktoplevel(borderwidth=5)
     tkwm.title(top,"Construct design for triangle test")
 
@@ -2862,8 +2839,6 @@ tkfocus(top)
 ###########################################################################################################################################
 ##############################################        FONCTION TRIANGLE.TEST         ##########################################################
 SensTriang <- function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Analyse triangle test")
 donnee<-get(.activeDataSet)
@@ -2976,7 +2951,7 @@ App<-function(){
     return(done)
 }
 
-####### Fonction attachée aux boutons OK, appel de triangle.test -------------------------------------------------------------------------------------
+####### Fonction attachee aux boutons OK, appel de triangle.test -------------------------------------------------------------------------------------
 onOK<-function(){
   done = App()
   if (done >0) tkdestroy(top)
@@ -3022,8 +2997,6 @@ tkfocus(top)
 ###########################################################################################################################################################
 ###################################################################          FONCTION   CARTO              ################################################
 SensCarto<-function(){
-    require(tcltk)
-    require(SensoMineR)
     top<-tktoplevel(borderwidth=5)
     tkwm.title(top,"Preference mapping")
     donnee<-get(.activeDataSet)
@@ -3066,7 +3039,7 @@ descopframe<-tkframe(top)
       tkwm.title(PlotWin,gettextRcmdr("Options"))
       tkwm.geometry(PlotWin, "-100+50")
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOKsub<-function()
       {
         if(tclvalue(method)==1) assign("Rmethod", 1, envir=env)
@@ -3119,7 +3092,7 @@ descopframe<-tkframe(top)
       level.val<-tclVar(Rlevel)
       level.ent <- tkentry(PlotWin,width=5,textvariable=level.val)
 
-      #mise en page des différents frames de PlotIndFrame
+      #mise en page des differents frames de PlotIndFrame
       tkgrid(tklabel(PlotWin, text=" "))
       tkgrid(axe.lab,axe.ent,sticky="w")
       tkgrid(resol.lab,resol.ent,sticky="w")
@@ -3177,7 +3150,7 @@ descFrame <- tkframe(top)
     tkselection.set(listdesc,0)
 
 
-#################### Fonctions liée au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liee au bouton 'Sorties' --------------------------------------------------------------------------------------------------
     env<-environment()
     Gclusters<-TRUE
     Gprodclust<-FALSE
@@ -3215,7 +3188,7 @@ onSortie<-function(){
     tkfocus(sortiestop)
 }
 
-###### Fonction principale qui lance CARTO sans fermer la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance CARTO sans fermer la fenetre------------------------------------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -3253,14 +3226,14 @@ App<-function(){
 }
 
 
-###### Fonction principale qui lance CARTO et ferme la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance CARTO et ferme la fenetre------------------------------------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
 }
 
 
-##### Positionnement des widgets et frames sur la fenêtre 'top' ------------------------------------------------------------------------------------------
+##### Positionnement des widgets et frames sur la fenetre 'top' ------------------------------------------------------------------------------------------
 App.but <- tkbutton(top,borderwidth=3,width=12,text="Submit",command=App,fg="blue")
 sorties.but<-tkbutton(optionsFrame,text="Outputs",command=onSortie,width=13,default="active",fg="darkred")
 
@@ -3285,8 +3258,6 @@ tkfocus(top)
 ###########################################################################################################################################################
 ###################################################################          FONCTION   CPA              ################################################
 SensCPA<-function(){
-    require(tcltk)
-    require(SensoMineR)
     top<-tktoplevel(borderwidth=5)
     tkwm.title(top,"Consumer Preference Analysis")
     donnee<-get(.activeDataSet)
@@ -3329,7 +3300,7 @@ descopframe<-tkframe(top)
       tkwm.title(PlotWin,gettextRcmdr("Options"))
       tkwm.geometry(PlotWin, "-100+50")
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOKsub<-function()
       {
         if(tclvalue(namepan.bool)=="1") assign("Rnamepan", TRUE, envir=env)
@@ -3364,7 +3335,7 @@ descopframe<-tkframe(top)
       tkconfigure(center.check,variable=center.bool)
       center.lab<-tklabel(PlotWin,text="Center data by panelist")
 
-      #mise en page des différents frames de PlotIndFrame
+      #mise en page des differents frames de PlotIndFrame
       tkgrid(tklabel(PlotWin, text=" "))
       tkgrid(axe.lab,axe.ent,sticky="w")
       tkgrid(scale.lab,scale.check,sticky="w")
@@ -3412,7 +3383,7 @@ descFrame <- tkframe(top)
     tkselection.set(listdesc,0)
 
 
-#################### Fonctions liée au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liee au bouton 'Sorties' --------------------------------------------------------------------------------------------------
     env<-environment()
     Gclusters<-FALSE
     Gprodclust<-FALSE
@@ -3470,7 +3441,7 @@ onSortie<-function(){
     tkfocus(sortiestop)
 }
 
-###### Fonction principale qui lance CPA sans fermer la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance CPA sans fermer la fenetre------------------------------------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -3501,14 +3472,14 @@ App<-function(){
 }
 
 
-###### Fonction principale qui lance CPA et ferme la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance CPA et ferme la fenetre------------------------------------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
 }
 
 
-##### Positionnement des widgets et frames sur la fenêtre 'top' ------------------------------------------------------------------------------------------
+##### Positionnement des widgets et frames sur la fenetre 'top' ------------------------------------------------------------------------------------------
 App.but <- tkbutton(top,borderwidth=3,width=12,text="Submit",command=App,fg="blue")
 sorties.but<-tkbutton(optionsFrame,text="Outputs",command=onSortie,width=13,default="active",fg="darkred")
 
@@ -3534,7 +3505,6 @@ tkfocus(top)
 ######################################################            FONCTION NAPPEPLOT          ##############################################################
 
 SensDrawnapp<-function(){
-require(SensoMineR)
 donnee<-get(.activeDataSet)
 nomdonnee<-.activeDataSet
 top<-tktoplevel(borderwidth=5)
@@ -3576,7 +3546,7 @@ optionsFrame <- tkframe(top,borderwidth=3,relief="ridge")
     tkgrid(numr.lab,numr.ent,sticky="w")
     tkgrid(numc.lab,numc.ent,sticky="w")
 
-######## Fonction liée au bouton OK -----------------------------------------------------------------------------------------------------
+######## Fonction liee au bouton OK -----------------------------------------------------------------------------------------------------
 
 App<-function(){
     variable <- vars.desc[as.numeric(tkcurselection(listdesc))+1]
@@ -3609,7 +3579,7 @@ onOK <- function(){
   if (done >0) tkdestroy(top)
 }
 
-######## Positionnement des widgets sur la fenêtre principale ----------------------------------------------------------------------------
+######## Positionnement des widgets sur la fenetre principale ----------------------------------------------------------------------------
 App.but<-tkbutton(top,text="Submit",command=App,fg="blue",width=13,borderwidth=3)
 OKCancelHelp(helpSubject="nappeplot")
 tkgrid(titleFrame, columnspan=2,sticky="w")
@@ -3631,14 +3601,9 @@ tkfocus(top)
 #####################################Fonction Sorting Task######################
 SensFAST<-function()
 {
-  require(tcltk)
-  require(FactoMineR)
-  require(SensoMineR)
+#    Creation des fonctions pour les options via nouvelle fenetre graphique
 
-
-#    Création des fonctions pour les options via nouvelle fenêtre graphique
-
-##! fonction pour le choix des variables qualitatives supplémentaires
+##! fonction pour le choix des variables qualitatives supplementaires
 #  Fillu.funct<-defmacro(label, firstLabel, expr=
 #  {
 #    env<-environment()
@@ -3651,7 +3616,7 @@ SensFAST<-function()
 #
 #      FilluWin<-tktoplevel()
 #      tkwm.title(FilluWin,gettextRcmdr("Choice of supplementary factors"))
-#      #création de la fonction FOK.funct
+#      #creation de la fonction FOK.funct
 #      FOK.funct<-function()
 #      {
 #        fact.select<-listfact.nom[as.numeric(tkcurselection(listfact))+1]
@@ -3669,7 +3634,7 @@ SensFAST<-function()
 #        tkdestroy(FilluWin)
 #      }
 #
-#      # création et mise en page de la fenetre Fillu
+#      # creation et mise en page de la fenetre Fillu
 #      listfact<-tklistbox(FilluWin,selectmode="extended",exportselection="FALSE",yscrollcommand=function(...)tkset(scrfact,...)) # Liste vide
 #      scrfact <-tkscrollbar(FilluWin,repeatinterval=5,command=function(...)tkyview(listfact,...))
 #      listfact.nom<-NULL
@@ -3702,7 +3667,7 @@ SensFAST<-function()
 #   tkgrid(Fillu.but, sticky="ew")
 #  })
 #
-#  #! fonction pour le choix des variables quantitatives supplémentaires
+#  #! fonction pour le choix des variables quantitatives supplementaires
 #  Dillu.funct<-defmacro(label, firstLabel, expr=
 #  {
 #    env<-environment()
@@ -3712,7 +3677,7 @@ SensFAST<-function()
 #    {
 #      DilluWin<-tktoplevel()
 #      tkwm.title(DilluWin,gettextRcmdr("Select supplementary variables"))
-#      #création de la fonction DOK.funct
+#      #creation de la fonction DOK.funct
 #      DOK.funct<-function()
 #      {
 #        vsup.select<-listvar.nom[as.numeric(tkcurselection(listvar))+1]
@@ -3730,7 +3695,7 @@ SensFAST<-function()
 #        tkdestroy(DilluWin)
 #      }
 #
-#      # création et mise en page de la fenetre Dillu
+#      # creation et mise en page de la fenetre Dillu
 #      listvar<-tklistbox(DilluWin,selectmode="extended",exportselection="FALSE",yscrollcommand=function(...)tkset(scrvar,...)) # Liste vide
 #      scrvar <-tkscrollbar(DilluWin,repeatinterval=5,command=function(...)tkyview(listvar,...))
 #      listvar.nom<-NULL
@@ -3768,7 +3733,7 @@ SensFAST<-function()
 #  })
 #
 #
-#  #! fonction pour le choix des individus supplémentaires
+#  #! fonction pour le choix des individus supplementaires
 #  Iillu.funct<-defmacro(label, firstLabel, expr=
 #  {
 #    env<-environment()
@@ -3778,7 +3743,7 @@ SensFAST<-function()
 #    {
 #      IilluWin<-tktoplevel()
 #      tkwm.title(IilluWin,gettextRcmdr("Select supplementary individuals"))
-#      #création de la fonction IOK.funct
+#      #creation de la fonction IOK.funct
 #      IOK.funct<-function()
 #      {
 #        ind.select<-rows[as.numeric(tkcurselection(listind))+1]
@@ -3795,7 +3760,7 @@ SensFAST<-function()
 #        tkdestroy(IilluWin)
 #      }
 #
-#      # création et mise en page de la fenetre Fillu
+#      # creation et mise en page de la fenetre Fillu
 #      listind<-tklistbox(IilluWin,selectmode="extended",exportselection="FALSE",yscrollcommand=function(...)tkset(scrind,...)) # Liste vide
 #      scrind <-tkscrollbar(IilluWin,repeatinterval=5,command=function(...)tkyview(listind,...))
 #      indice<-0
@@ -3831,7 +3796,7 @@ SensFAST<-function()
   {
     env<-environment()
     compteur.graph<-0
-    #déclaration des variables
+    #declaration des variables
     Rchoix<-TRUE
     RTitle<-NULL
     Rlabel<-c("ind",# "ind.sup", "quali.sup",
@@ -3872,14 +3837,14 @@ SensFAST<-function()
       tkwm.geometry(PlotWin, "-100+50")
       PlotWin2<-tkframe(PlotWin)
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOKsub<-function()
       {
         assign("compteur.graph", compteur.graph+1, envir=env)
         if(compteur.graph>0) tclvalue(.PlotLabel)<-paste(label, "", sep=" ")
         tkconfigure(Plot.but, fg="blue")
 
-        # gestion des entrées de la partie graphique des ellipses
+        # gestion des entrees de la partie graphique des ellipses
         if(tclvalue(ell.check.value)==1) assign("Echoix", TRUE, envir=env)
         else assign("Echoix", FALSE, envir=env)
 
@@ -3894,7 +3859,7 @@ SensFAST<-function()
 #          else assign("Elabel", FALSE, envir=env)
         }
 
-        # gestion des entrées de la partie graphique des Groupes
+        # gestion des entrees de la partie graphique des Groupes
         if(tclvalue(grpe.check.value)==1) assign("Gchoix", TRUE, envir=env)
         else assign("Gchoix", FALSE, envir=env)
 
@@ -3909,7 +3874,7 @@ SensFAST<-function()
           else assign("Glabel", FALSE, envir=env)
         }
 
-        # gestion des entrées de la partie graphique des individus
+        # gestion des entrees de la partie graphique des individus
         if(tclvalue(ind.check.value)==1) assign("Rchoix", TRUE, envir=env)
         else assign("Rchoix", FALSE, envir=env)
 
@@ -3997,7 +3962,7 @@ SensFAST<-function()
 #      tkgrid(tklabel(ElabelFrame, text=gettextRcmdr("Draw labels for the products")),label.ell.check)
 #
 
-      #mise en page des différents frames de PlotEllFrame
+      #mise en page des differents frames de PlotEllFrame
       tkgrid(EchoixFrame)
       #tkgrid(ETitleFrame)
   #    tkgrid(ElabelFrame)
@@ -4029,7 +3994,7 @@ SensFAST<-function()
       tkgrid(tklabel(GlabelFrame, text=gettextRcmdr("Draw labels for the groups")),label.grpe.check)
 
 
-      #mise en page des différents frames de PlotGrpeFrame
+      #mise en page des differents frames de PlotGrpeFrame
       tkgrid(GchoixFrame)
       tkgrid(GTitleFrame)
       tkgrid(GlabelFrame)
@@ -4176,7 +4141,7 @@ SensFAST<-function()
     YlimIndMax.entry <-tkentry(RlimFrame,width="5",textvariable=YlimIndMax)
     tkgrid(tklabel(RlimFrame,text=gettextRcmdr("y limits of the graph:")),YlimIndMin.entry,YlimIndMax.entry)
 
-    #mise en page des différents frames de PlotIndFrame
+    #mise en page des differents frames de PlotIndFrame
     #tkgrid(tklabel(PlotIndFrame, text=gettextRcmdr("Individuals graph"), font=font2))
     #tkgrid(tklabel(PlotIndFrame, text=" "))
     tkgrid(RchoixFrame)
@@ -4207,7 +4172,7 @@ SensFAST<-function()
     WcosFrame<-tkframe(PlotVarFrame,borderwidth=2)
     WlimCosValue<-tclVar(paste(Wlim.cos))
     WlimCos.entry<-tkentry(WcosFrame, width=5, textvariable=WlimCosValue)
-    tkgrid(tklabel(WcosFrame,text=gettextRcmdr("Draw variables with a cos² >:")),WlimCos.entry)
+    tkgrid(tklabel(WcosFrame,text=gettextRcmdr("Draw variables with a cos2 >:")),WlimCos.entry)
 
    WlabelFrame<-tkframe(PlotVarFrame,borderwidth=2)
     #label.quanti.sup.check<-tkcheckbutton(WlabelFrame)
@@ -4230,7 +4195,7 @@ SensFAST<-function()
     #ChangeColor.quanti.sup.button <- tkbutton(WcolFrame,text=gettextRcmdr("Change Color"),command=ChangeColor.quanti.sup)
 #    tkgrid(tklabel(WcolFrame, text=gettextRcmdr("Color for supplementary variables")),canvas.quanti.sup,ChangeColor.quanti.sup.button)
 #
-    #mise en page des différents frames de PlotVarFrame
+    #mise en page des differents frames de PlotVarFrame
     tkgrid(WchoixFrame)
     tkgrid(WTitleFrame)
     tkgrid(WcosFrame)
@@ -4261,7 +4226,7 @@ SensFAST<-function()
   })
 
 
-  #! fonction pour la réinitialisation des paramètre
+  #! fonction pour la reinitialisation des parametre
   Reinitializ.funct<-function()
   {
     tkdestroy(top)
@@ -4269,12 +4234,12 @@ SensFAST<-function()
   }
 
 
-  #! fonction pour le choix des éléments de sortie
+  #! fonction pour le choix des elements de sortie
   Sortie.funct<-defmacro(label, firstLabel, expr=
   {
     env<-environment()
     compteur.sortie<-0
-    #déclaration des variables
+    #declaration des variables
     Rpropre<-FALSE
     RFichier <- ""
         Rvariable<-FALSE
@@ -4296,7 +4261,7 @@ SensFAST<-function()
       SortieWin<-tktoplevel()
       tkwm.title(SortieWin,"Displayed outputs")
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOK.sortie<-function()
       {
         assign("compteur.sortie", compteur.sortie+1, envir=env)
@@ -4453,21 +4418,21 @@ SensFAST<-function()
   })
 
 
-  #! fonction associer au bouton OK, execute et détruit l'interface graphique
+  #! fonction associer au bouton OK, execute et detruit l'interface graphique
 onOK <- function(){
   done = OnAppliquer()
   tkdestroy(top)
 }
 
-  #! fonction associer au bouton Appliquer, execute sans détruire la fenêtre top
+  #! fonction associer au bouton Appliquer, execute sans detruire la fenetre top
   OnAppliquer<-function()
   {
-    # liste de toutes les variables interne créées      (** mise en forme incomplète)
+    # liste de toutes les variables interne creees      (** mise en forme incomplete)
       # sur la fenetre principale
 #         listdesc         **
 #         resu.val         **
 #         ncp.val          **
-      # dans les boutons des fenêtres illustratives
+      # dans les boutons des fenetres illustratives
 #         variablefact     **
 #         variableillu     **
 #         individuillu     **
@@ -4491,7 +4456,7 @@ onOK <- function(){
 #           Rqualisup
 
 
-    # récupération des paramètres de la fenêtre principale
+    # recuperation des parametres de la fenetre principale
     nom.res<-tclvalue(resu.val)
     if (length(ls(pat=nom.res))>0) justDoIt(paste('remove (',nom.res,')'))
     if(length(as.numeric(tkcurselection(listdesc)))<2) varActives<-listdesc.nom
@@ -4505,7 +4470,7 @@ onOK <- function(){
     B<-as.numeric(tclvalue(B.val))
     ncp.boot<-as.numeric(tclvalue(ncp.boot.val))
 
-    # gestion du tableau de données pour l'ACM
+    # gestion du tableau de donnees pour l'ACM
 #    if(!is.null(individuillu)) {
 #      ind.actif<-rows[-which(rows %in% individuillu)]
 #      if(!is.null(variableillu)) {
@@ -4533,7 +4498,7 @@ onOK <- function(){
     donnee.depart<-activeDataSet()
     activeDataSet(paste(activeDataSet(),'.', 'fast', sep=""))
 
-    # gestion de la commande réalisant la fonction Sorting Task
+    # gestion de la commande realisant la fonction Sorting Task
       commande.FAST<-paste(nom.res, '<-fast(', activeDataSet(), ', ncp=', ncp,', word.min=', mot,', sep.words="', separ,'", alpha=', alpha,', B=',B,', ncp.boot=',ncp.boot,', graph = FALSE)', sep="")
 
     justDoIt(commande.FAST)
@@ -4598,7 +4563,7 @@ onOK <- function(){
 #      logger(commande.plotInd)
 #    }}
 
-    # gestion de l'édition de certains resultats
+    # gestion de l'edition de certains resultats
     if (RFichier==""){
       if(Rpropre) doItAndPrint(paste( nom.res, '$eig', sep=""))
       if(Rvariable) doItAndPrint(paste( nom.res, '$var', sep=""))
@@ -4666,32 +4631,32 @@ onOK <- function(){
 
     }
 
-    # Re-chargement du tableau de départ et supression du tableau temporaire
+    # Re-chargement du tableau de depart et supression du tableau temporaire
     activeDataSet(donnee.depart)
     justDoIt(paste('remove(',activeDataSet(),'.fast)',sep=""))
     logger(paste('remove(',activeDataSet(),'.fast)',sep=""))
-    # destuction de la fenêtre Top
+    # destuction de la fenetre Top
     #closeDialog(top)
   }
 
 
 ################################################################################
-#                   Création de la fenêtre top                                 #
+#                   Creation de la fenetre top                                 #
 ################################################################################
   top<-tktoplevel(borderwidth=10)
   tkwm.title(top, gettextRcmdr("fast"))
   tkwm.geometry(top, "-100+50")
 
-  # définition des polices
+  # definition des polices
   font2<-tkfont.create(family="times",size=12,weight="bold")
   fontheading<-tkfont.create(family="times",size=18,weight="bold")
 
-  # récupération du jeu de données actif
+  # recuperation du jeu de donnees actif
   donnee<-get(.activeDataSet)
   vars<-colnames(donnee)
   rows<-rownames(donnee)
 
-  # création de la liste pour le choix des variables actives
+  # creation de la liste pour le choix des variables actives
   listdesc<-tklistbox(top,selectmode="extended",exportselection="FALSE",yscrollcommand=function(...)tkset(scr,...))
   scr <-tkscrollbar(top,repeatinterval=5,command=function(...)tkyview(listdesc,...))
   listdesc.nom<-NULL
@@ -4702,7 +4667,7 @@ onOK <- function(){
       }
   }
 
-  # création de tous les boutons d'options dans IlluFrame
+  # creation de tous les boutons d'options dans IlluFrame
   IlluFrame<- tkframe(top, borderwidth=2)
   Reinitializ.but<-tkbutton(IlluFrame, text=gettextRcmdr("Restart"),width=18,command=Reinitializ.funct, borderwidth=3)
        # mise en page de IlluFrame
@@ -4726,7 +4691,7 @@ onOK <- function(){
   tkgrid.columnconfigure(IlluFrame,2, minsize=40)
   tkgrid.columnconfigure(IlluFrame,4, minsize=40)
 
-  # création des options dans OptionFrame
+  # creation des options dans OptionFrame
   OptionFrame<-tkframe(top, borderwidth=2, relief="groove")
   resu.lab<-tklabel(OptionFrame,text=gettextRcmdr("Name of the result object: "))
   resu.val<-tclVar("res")
@@ -4802,14 +4767,13 @@ onOK <- function(){
 ######################################################            FONCTION INDSCAL          ##############################################################
 
 SensIndscal<-function(){
-require(SensoMineR)
 donnee<-get(.activeDataSet)
 nomdonnee<-.activeDataSet
 top<-tktoplevel(borderwidth=5)
 tkwm.title(top,"Indscal model")
 
 
-#################### Fonctions liées au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liees au bouton 'Sorties' --------------------------------------------------------------------------------------------------
 
     env<-environment()
     Gpoints<-FALSE
@@ -4906,7 +4870,7 @@ onSortie<-function(){
     tkgrid(resu.lab,resu,sticky="w")
 
 
-####### Fonction liée au bouton Appliquer, appel de la fonction Panelperf -------------------------------------------------------------------------------
+####### Fonction liee au bouton Appliquer, appel de la fonction Panelperf -------------------------------------------------------------------------------
 App<-function(){
     variable <- vars.desc[as.numeric(tkcurselection(listdesc))+1]
     nbitemdesc<-c(tclvalue(tkcurselection(listdesc)))
@@ -4957,7 +4921,7 @@ onOK <- function(){
   if (done >0) tkdestroy(top)
 }
 
-######## Positionnement des widgets sur la fenêtre principale ----------------------------------------------------------------------------
+######## Positionnement des widgets sur la fenetre principale ----------------------------------------------------------------------------
 sorties<-tkbutton(optionsFrame,text="Outputs",borderwidth=3,width=12,fg="darkred",command=onSortie)
 appel<-tkbutton(top,text="Submit",borderwidth=3,width=12,fg="blue",command=App)
 OKCancelHelp(helpSubject="indscal")
@@ -4983,14 +4947,13 @@ tkfocus(top)
 ######################################################            FONCTION PMFA          ##############################################################
 
 SensPmfa<-function(){
-require(SensoMineR)
 donnee<-get(.activeDataSet)
 nomdonnee<-.activeDataSet
 top<-tktoplevel(borderwidth=5)
 tkwm.title(top,"Procrustes Multiple Factor Analysis")
 
 
-#################### Fonctions liées au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liees au bouton 'Sorties' --------------------------------------------------------------------------------------------------
 
     env<-environment()
     Gnappeind<-FALSE
@@ -5086,7 +5049,7 @@ onSortie<-function(){
     tkgrid(resu.lab,resu,sticky="w")
 
 
-####### Fonction liée au bouton Appliquer, appel de la fonction PMFA -------------------------------------------------------------------------------
+####### Fonction liee au bouton Appliquer, appel de la fonction PMFA -------------------------------------------------------------------------------
 App<-function(){
     variable <- vars.desc[as.numeric(tkcurselection(listdesc))+1]
     nbitemdesc<-c(tclvalue(tkcurselection(listdesc)))
@@ -5130,7 +5093,7 @@ onOK <- function(){
   if (done >0) tkdestroy(top)
 }
 
-######## Positionnement des widgets sur la fenêtre principale ----------------------------------------------------------------------------
+######## Positionnement des widgets sur la fenetre principale ----------------------------------------------------------------------------
 sorties<-tkbutton(optionsFrame,text="Options",borderwidth=3,width=12,fg="darkred",command=onSortie)
 appel<-tkbutton(top,text="Submit",borderwidth=3,width=12,fg="blue",command=App)
 OKCancelHelp(helpSubject="pmfa")
@@ -5156,12 +5119,10 @@ tkfocus(top)
 ###################################################       FONCTION optimaldesign  #####################################################
 
 SensOptDesign<-function(){
-require(tcltk)
-require(SensoMineR)
 top<-tktoplevel(borderwidth=10)
 tkwm.title(top,"Optimal Design")
 
-#################### Fonctions liées au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liees au bouton 'Sorties' --------------------------------------------------------------------------------------------------
 
 env<-environment()
 GnbPanelistMin <- ""
@@ -5236,7 +5197,7 @@ onSortie<-function(){
     tkgrid(resu.lab,resu,sticky="w")
 
 
-####### Fonction liée au bouton Appliquer, appel de la fonction Panelperf -------------------------------------------------------------------------------
+####### Fonction liee au bouton Appliquer, appel de la fonction Panelperf -------------------------------------------------------------------------------
 App<-function(){
     ordre.val <- as.numeric(tclvalue(ordre.bool))
     resultat<-tclvalue(resu.val)
@@ -5264,7 +5225,7 @@ App<-function(){
   }
 
 
-####### Fonction liée au bouton OK, appel de la fonction Paneliperf -------------------------------------------------------------------------------
+####### Fonction liee au bouton OK, appel de la fonction Paneliperf -------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
@@ -5291,8 +5252,6 @@ tkfocus(top)
 ###################################################################          FONCTION   PANELMATCH           ################################################
 
 SensPanelmatch<-function(){
-    require(tcltk)
-    require(SensoMineR)
     top<-tktoplevel(borderwidth=5)
     tkwm.title(top,"Comparison of panels")
     vars<-listDataSets()
@@ -5346,7 +5305,7 @@ descopframe<-tkframe(top)
       tkwm.title(PlotWin,gettextRcmdr("Options"))
       tkwm.geometry(PlotWin, "-100+50")
 
-      #création de la fonction onOKsub
+      #creation de la fonction onOKsub
       onOKsub<-function()
       {
 ##        if(tclvalue(cbValue)=="1") assign("Rgraph", TRUE, envir=env)
@@ -5399,7 +5358,7 @@ descopframe<-tkframe(top)
       choix.val<-tclVar(Rchoix)
       choix.ent <- tkentry(PlotWin,width=15,textvariable=choix.val)
 
-      #mise en page des différents frames de PlotIndFrame
+      #mise en page des differents frames de PlotIndFrame
       tkgrid(tklabel(PlotWin, text=" "))
       tkgrid(axe.lab,axe.ent,sticky="w")
       tkgrid(simul.lab,simul.ent,sticky="w")
@@ -5461,7 +5420,7 @@ descFrame <- tkframe(top)
     tkselection.set(listdesc,0)
 
 
-#################### Fonctions liée au bouton 'Sorties' --------------------------------------------------------------------------------------------------
+#################### Fonctions liee au bouton 'Sorties' --------------------------------------------------------------------------------------------------
     env<-environment()
     Geig<-FALSE
     Gcoord<-FALSE
@@ -5520,7 +5479,7 @@ onSortie<-function(){
 }
 
 
-###### Fonction principale qui lance PANELMATCH sans fermer la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance PANELMATCH sans fermer la fenetre------------------------------------------------------------------------------------------------------------
 App<-function(){
     nbitemlist<-c(tclvalue(tkcurselection(listdesc)))
     nbitem<-unlist(strsplit(nbitemlist,"\\ "))
@@ -5575,14 +5534,14 @@ App<-function(){
 }
 
 
-###### Fonction principale qui lance PANELMATCH et ferme la fenêtre------------------------------------------------------------------------------------------------------------
+###### Fonction principale qui lance PANELMATCH et ferme la fenetre------------------------------------------------------------------------------------------------------------
 onOK <- function(){
   done = App()
   if (done >0) tkdestroy(top)
 }
 
 
-##### Positionnement des widgets et frames sur la fenêtre 'top' ------------------------------------------------------------------------------------------
+##### Positionnement des widgets et frames sur la fenetre 'top' ------------------------------------------------------------------------------------------
 App.but <- tkbutton(top,borderwidth=3,width=12,text="Submit",command=App,fg="blue")
 sorties.but<-tkbutton(optionsFrame,text="Outputs",command=onSortie,width=13,default="active",fg="darkred")
 
